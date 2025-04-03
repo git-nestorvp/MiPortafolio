@@ -17,23 +17,34 @@
             position: relative;
         }
 
-        /* Efecto de números binarios (Matrix) */
-        .matrix {
+        /* Efecto de partículas sutiles */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Mantener el canvas detrás de todos los demás elementos */
-            pointer-events: none; /* Evitar que el canvas interfiera con la interacción con otros elementos */
+            z-index: 0; /* Asegura que las partículas estén debajo del contenido principal */
+            pointer-events: none; /* Las partículas no interfieren con la interacción */
         }
 
-        .matrix-canvas {
+        .particle {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            background-color: #00ff00;
+            border-radius: 50%;
+            animation: moveParticle 4s infinite;
+        }
+
+        @keyframes moveParticle {
+            0% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
         }
 
         header {
@@ -86,10 +97,8 @@
 </head>
 <body>
 
-<!-- Aquí está el efecto de Matrix -->
-<div class="matrix">
-    <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
-</div>
+<!-- Efecto de partículas -->
+<div class="particles" id="particlesContainer"></div>
 
 <header>
     <h1>Portafolio de Néstor Villon</h1>
@@ -115,4 +124,35 @@
     </section>
 </div>
 
-<footer
+<footer>
+    <p>&copy; 2025 Néstor Villon | Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    // Generador de partículas
+    const particlesContainer = document.getElementById('particlesContainer');
+
+    // Crear partículas dinámicamente
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 10 + 5; // Tamaño aleatorio entre 5 y 15px
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * window.innerWidth}px`;
+        particle.style.top = `${Math.random() * window.innerHeight}px`;
+
+        particlesContainer.appendChild(particle);
+
+        // Eliminar la partícula después de un tiempo para evitar la acumulación
+        setTimeout(() => {
+            particlesContainer.removeChild(particle);
+        }, 4000); // 4 segundos de duración de cada partícula
+    }
+
+    // Generar partículas cada 100ms
+    setInterval(createParticle, 100);
+</script>
+
+</body>
+</html>
