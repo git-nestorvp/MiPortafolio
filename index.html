@@ -15,16 +15,17 @@
             overflow: hidden;
             background: url('fondo.jpg') no-repeat center center/cover;
             height: 100vh;
+            position: relative; /* Para que los elementos internos estén posicionados encima */
         }
 
         /* Lienzo para la animación de fondo */
         #matrix {
-            position: fixed;
+            position: absolute; /* Cambié de fixed a absolute para mantenerlo en el fondo */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Aseguramos que esté en el fondo */
+            z-index: -1; /* Asegura que el canvas quede en el fondo */
         }
 
         /* Franja semi-transparente */
@@ -34,8 +35,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Negro semi-transparente */
-            z-index: 1; /* Encima de la animación */
+            background: rgba(0, 0, 0, 0.5); /* Capa negra semi-transparente */
+            z-index: 1; /* Encima del fondo pero debajo del contenido */
         }
 
         /* Encabezado */
@@ -43,7 +44,8 @@
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             text-align: center;
-            z-index: 2;
+            z-index: 2; /* Asegura que el encabezado quede encima */
+            position: relative;
         }
 
         /* Contenedor principal */
@@ -54,7 +56,7 @@
             background: rgba(0, 0, 0, 0.8);
             border-radius: 10px;
             text-align: center;
-            position: relative;
+            position: relative; /* Necesario para que los elementos se muestren por encima del fondo */
             z-index: 2;
         }
 
