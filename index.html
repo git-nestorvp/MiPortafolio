@@ -11,46 +11,44 @@
             margin: 0;
             padding: 0;
             color: #fff;
-            background: url('fondo.jpg') no-repeat center center/cover; /* Aquí se usa la imagen de fondo estática */
-            height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
-            overflow: hidden; /* Evita que aparezca una barra de desplazamiento */
+            background: url('fondo.jpg') no-repeat center center/cover;
+            height: 100vh; /* Fondo cubre toda la pantalla */
+            overflow: hidden; /* Evita la barra de desplazamiento */
+            position: relative;
         }
 
-        /* Efecto de números binarios de Matrix */
+        /* Efecto de números binarios (Matrix) */
         .matrix {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: black;
-            color: rgba(0, 255, 0, 0.5);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 18px;
-            line-height: 1.5;
-            pointer-events: none; /* Evita que el efecto interfiera con el contenido */
             z-index: -1; /* Pone el efecto detrás de todo el contenido */
-            animation: matrix 10s linear infinite;
+            pointer-events: none; /* Evita que interfiera con el contenido */
         }
 
-        @keyframes matrix {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100%); }
+        .matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         header {
-            background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             text-align: center;
+            z-index: 10; /* Asegura que el texto del encabezado esté por encima del fondo */
         }
 
         .container {
             width: 80%;
             margin: auto;
             padding: 40px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 10px;
             text-align: center;
+            z-index: 10; /* Asegura que el texto esté por encima del fondo */
+            position: relative;
         }
 
         .perfil-img {
@@ -83,13 +81,15 @@
         footer {
             text-align: center;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
 <body>
 
-<div class="matrix"></div> <!-- Aquí está el fondo animado tipo Matrix -->
+<!-- Aquí está el efecto de Matrix -->
+<div class="matrix">
+    <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+</div>
 
 <header>
     <h1>Portafolio de Néstor Villon</h1>
@@ -118,6 +118,39 @@
 <footer>
     <p>&copy; 2025 Néstor Villon | Todos los derechos reservados.</p>
 </footer>
+
+<script>
+    // Código para la animación de Matrix (números binarios)
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    const cols = canvas.width = window.innerWidth;
+    const rows = canvas.height = window.innerHeight;
+
+    const chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 12;
+    const columns = Math.floor(cols / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; // Fondo semi-transparente
+        ctx.fillRect(0, 0, cols, rows);
+        ctx.fillStyle = "#0f0"; // Color de los números binarios (verde)
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > rows && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+
+            drops[i]++;
+        }
+    }
+
+    setInterval(draw, 35);
+</script>
 
 </body>
 </html>
