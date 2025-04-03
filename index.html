@@ -3,66 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Néstor Villon</title>
+    <title>Portafolio de Néstor V.P.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilos generales */
         body {
             font-family: "Arial", sans-serif;
             margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            padding-top: 50px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Fondo animado */
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://example.com/your-cybersecurity-image.jpg'); /* Cambia esta URL por tu imagen de ciberseguridad */
-            background-size: cover;
-            background-position: center;
-            filter: blur(5px);
-            animation: moveBackground 30s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes moveBackground {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Estilos del encabezado */
-        header {
-            background-color: #333;
-            color: white;
-            padding: 15px 0;
+            color: #fff;
             text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?hacker') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
         }
 
-        header h1 {
-            margin: 0;
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
         }
 
-        /* Contenedor principal */
         .container {
             width: 80%;
             margin: auto;
             padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin-top: 50px;
         }
 
-        /* Sección bienvenida */
-        .bienvenida {
-            text-align: center;
+        .perfil-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #00aaff;
         }
 
         .descripcion {
@@ -70,22 +42,6 @@
             line-height: 1.6;
         }
 
-        /* Estilo para los proyectos */
-        .proyectos {
-            margin-top: 40px;
-        }
-
-        .proyectos a {
-            color: #00aaff;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
-
-        .proyectos a:hover {
-            text-decoration: underline;
-        }
-
-        /* Estilos de iconos sociales */
         .social-icons {
             display: flex;
             justify-content: center;
@@ -95,97 +51,47 @@
 
         .social-icons a {
             font-size: 30px;
-            color: #333;
+            color: #00aaff;
             text-decoration: none;
         }
 
-        .social-icons a:hover {
+        .proyectos a {
             color: #00aaff;
+            text-decoration: none;
         }
 
-        /* Estilo para el pie de página */
+        .proyectos a:hover {
+            text-decoration: underline;
+        }
+
         footer {
-            text-align: center;
             padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 40px;
-        }
-
-        /* Animaciones */
-        h1, h2 {
-            animation: fadeIn 3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            background-color: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
 <body>
 
-    <!-- Fondo de ciberseguridad -->
-    <div class="background"></div>
+<header>
+    <h1>Portafolio de Néstor V.P.</h1>
+</header>
 
-    <!-- Encabezado -->
-    <header>
-        <h1>Portafolio de Néstor V.P.</h1>
-    </header>
+<div class="container">
+    <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="perfil-img">
+    <h2>Bienvenido a mi Portafolio</h2>
+    <p class="descripcion">
+        Soy un estudiante de Ingeniería de Sistemas (7° ciclo) apasionado por la ciberseguridad y la
+        administración de infraestructuras de red. Experto en seguridad de redes, mitigación de ataques y cloud WAF.
+    </p>
+    <section class="social-icons">
+        <a href="https://github.com/nestorvp" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/nestorvp" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </section>
+</div>
 
-    <div class="container">
-        <!-- Sección bienvenida -->
-        <section class="bienvenida">
-            <h2>Bienvenido a mi Portafolio</h2>
-            <p class="descripcion">
-                Soy un estudiante de Ingeniería de Sistemas (7° ciclo) apasionado por la ciberseguridad y la
-                administración de infraestructuras de red. Cuento con experiencia en la implementación,
-                configuración y gestión de soluciones de seguridad y conectividad en entornos empresariales.
-                <br><br>
-                <strong>Habilidades y Experiencia:</strong><br>
-                - Seguridad de redes: Configuración y administración de firewalls, switches, routers y access points.<br>
-                - Seguridad en la nube: Implementación y gestión de Cloud WAF para protección de aplicaciones web.<br>
-                - Mitigación de ataques: Gestión de soluciones Anti-DDoS y estrategias de protección contra ataques a la red.<br>
-                - Gestión de tráfico y acceso: Configuración de MRA/MSA y administración de seguridad en aplicaciones.
-            </p>
-        </section>
-
-        <!-- Sección de proyectos -->
-        <section class="proyectos">
-            <h2>Mis Proyectos</h2>
-            <p>Aquí encontrarás algunos de los proyectos en los que he trabajado, incluyendo configuraciones de seguridad,
-                automatización y herramientas para la gestión de redes:</p>
-            <div>
-                <h3>Proyecto de Control de Gastos</h3>
-                <p>Este es un proyecto que he desarrollado, donde se gestionan gastos personales de manera eficiente. Puedes explorar el proyecto a través del siguiente enlace:</p>
-                <a href="https://git-nestorvp.github.io/Control-Gastos-App/" target="_blank">Ver Proyecto de Control de Gastos</a>
-            </div>
-        </section>
-
-        <!-- Iconos sociales -->
-        <section class="social-icons">
-            <a href="https://github.com/nestorvp" target="_blank" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/nestorvp" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://twitter.com/nestorvp" target="_blank" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-        </section>
-    </div>
-
-    <!-- Pie de página -->
-    <footer>
-        <p>&copy; 2025 Néstor V.P. | Todos los derechos reservados.</p>
-    </footer>
+<footer>
+    <p>&copy; 2025 Néstor V.P. | Todos los derechos reservados.</p>
+</footer>
 
 </body>
 </html>
