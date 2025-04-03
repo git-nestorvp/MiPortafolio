@@ -17,40 +17,51 @@
             position: relative;
         }
 
-        /* Efecto de partículas sutiles */
-        .particles {
+        /* Franja semi-transparente para el fondo */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Negro semi-transparente */
+            z-index: 0; /* Colocamos la franja debajo del contenido */
+        }
+
+        /* Efecto de binarios */
+        .binary {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Asegura que las partículas estén debajo del contenido principal */
-            pointer-events: none; /* Las partículas no interfieren con la interacción */
+            z-index: 0; /* Asegura que los binarios estén en el fondo */
+            pointer-events: none;
+            font-family: monospace;
+            font-size: 18px;
+            color: #00ff00; /* Verde neón */
+            white-space: nowrap;
+            overflow: hidden;
         }
 
-        .particle {
+        .binary span {
             position: absolute;
-            background-color: #00ff00;
-            border-radius: 50%;
-            animation: moveParticle 4s infinite;
+            animation: binaryAnimation 5s infinite linear;
         }
 
-        @keyframes moveParticle {
+        @keyframes binaryAnimation {
             0% {
-                transform: translateY(0) rotate(0);
-            }
-            50% {
-                transform: translateY(-100px) rotate(180deg);
+                top: -100%;
             }
             100% {
-                transform: translateY(0) rotate(360deg);
+                top: 100%;
             }
         }
 
         header {
             padding: 20px;
             text-align: center;
-            z-index: 10; /* Asegura que el encabezado esté por encima */
+            z-index: 10;
         }
 
         .container {
@@ -58,7 +69,7 @@
             margin: auto;
             padding: 40px;
             text-align: center;
-            z-index: 10; /* Asegura que el contenido esté por encima del fondo */
+            z-index: 10;
             position: relative;
         }
 
@@ -97,8 +108,13 @@
 </head>
 <body>
 
-<!-- Efecto de partículas -->
-<div class="particles" id="particlesContainer"></div>
+<!-- Franja semi-transparente -->
+<div class="overlay"></div>
+
+<!-- Efecto de binarios -->
+<div class="binary" id="binaryContainer">
+    <!-- Aquí se generarán los binarios -->
+</div>
 
 <header>
     <h1>Portafolio de Néstor Villon</h1>
@@ -129,29 +145,22 @@
 </footer>
 
 <script>
-    // Generador de partículas
-    const particlesContainer = document.getElementById('particlesContainer');
+    // Generador de binarios
+    function generateBinary() {
+        const container = document.getElementById('binaryContainer');
+        const binaryLine = document.createElement('span');
+        binaryLine.innerText = Math.random().toString(2).substr(2, 30); // Genera una cadena binaria
+        binaryLine.style.top = Math.random() * window.innerHeight + "px";
+        container.appendChild(binaryLine);
 
-    // Crear partículas dinámicamente
-    function createParticle() {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        const size = Math.random() * 10 + 5; // Tamaño aleatorio entre 5 y 15px
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * window.innerWidth}px`;
-        particle.style.top = `${Math.random() * window.innerHeight}px`;
-
-        particlesContainer.appendChild(particle);
-
-        // Eliminar la partícula después de un tiempo para evitar la acumulación
+        // Eliminar binario después de un tiempo
         setTimeout(() => {
-            particlesContainer.removeChild(particle);
-        }, 4000); // 4 segundos de duración de cada partícula
+            container.removeChild(binaryLine);
+        }, 5000); // 5 segundos de duración de cada binario
     }
 
-    // Generar partículas cada 100ms
-    setInterval(createParticle, 100);
+    // Generar binarios cada 100ms
+    setInterval(generateBinary, 100);
 </script>
 
 </body>
