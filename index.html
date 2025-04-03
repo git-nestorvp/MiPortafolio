@@ -6,35 +6,44 @@
     <title>Portafolio de Néstor Villon</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilos generales */
         body {
             font-family: "Arial", sans-serif;
             margin: 0;
             padding: 0;
             color: #fff;
-            overflow: hidden;
-            background: url('fondo.jpg') no-repeat center center/cover;
+            background: url('fondo.jpg') no-repeat center center/cover; /* Aquí se usa la imagen de fondo estática */
+            height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
+            overflow: hidden; /* Evita que aparezca una barra de desplazamiento */
         }
 
-        /* Fondo animado tipo Matrix */
-        #matrix {
+        /* Efecto de números binarios de Matrix */
+        .matrix {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: black;
-            z-index: -1;
+            color: rgba(0, 255, 0, 0.5);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+            line-height: 1.5;
+            pointer-events: none; /* Evita que el efecto interfiera con el contenido */
+            z-index: -1; /* Pone el efecto detrás de todo el contenido */
+            animation: matrix 10s linear infinite;
         }
 
-        /* Encabezado */
+        @keyframes matrix {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
         header {
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             text-align: center;
         }
 
-        /* Contenedor principal */
         .container {
             width: 80%;
             margin: auto;
@@ -44,7 +53,6 @@
             text-align: center;
         }
 
-        /* Imagen de perfil */
         .perfil-img {
             width: 150px;
             height: 150px;
@@ -53,14 +61,12 @@
             margin-bottom: 20px;
         }
 
-        /* Descripción */
         .descripcion {
             font-size: 18px;
             line-height: 1.6;
             text-align: justify;
         }
 
-        /* Iconos sociales */
         .social-icons a {
             font-size: 30px;
             color: #00aaff;
@@ -68,14 +74,12 @@
             text-decoration: none;
         }
 
-        /* Enlaces de proyectos */
         .proyectos a {
             color: #00aaff;
             font-weight: bold;
             text-decoration: none;
         }
 
-        /* Pie de página */
         footer {
             text-align: center;
             padding: 20px;
@@ -85,8 +89,7 @@
 </head>
 <body>
 
-<!-- Lienzo para la animación de fondo -->
-<canvas id="matrix"></canvas>
+<div class="matrix"></div> <!-- Aquí está el fondo animado tipo Matrix -->
 
 <header>
     <h1>Portafolio de Néstor Villon</h1>
@@ -115,45 +118,6 @@
 <footer>
     <p>&copy; 2025 Néstor Villon | Todos los derechos reservados.</p>
 </footer>
-
-<!-- Script de fondo animado estilo Matrix -->
-<script>
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const symbols = "010101010101011011001010";
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function drawMatrix() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "#00ff00";
-        ctx.font = `${fontSize}px monospace`;
-
-        for (let i = 0; i < drops.length; i++) {
-            const text = symbols[Math.floor(Math.random() * symbols.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    }
-
-    setInterval(drawMatrix, 50);
-
-    window.addEventListener("resize", () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-</script>
 
 </body>
 </html>
