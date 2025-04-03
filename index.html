@@ -14,28 +14,17 @@
             color: #fff;
             overflow: hidden;
             background: url('fondo.jpg') no-repeat center center/cover;
-            height: 100vh;
         }
 
-        /* Lienzo para la animación de fondo */
+        /* Fondo animado tipo Matrix */
         #matrix {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-        }
-
-        /* Franja semi-transparente */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Negro semi-transparente */
-            z-index: 1; /* Debajo del contenido */
+            background: black;
+            z-index: -1;
         }
 
         /* Encabezado */
@@ -43,7 +32,6 @@
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             text-align: center;
-            z-index: 2;
         }
 
         /* Contenedor principal */
@@ -54,8 +42,6 @@
             background: rgba(0, 0, 0, 0.8);
             border-radius: 10px;
             text-align: center;
-            position: relative;
-            z-index: 2;
         }
 
         /* Imagen de perfil */
@@ -71,3 +57,103 @@
         .descripcion {
             font-size: 18px;
             line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Iconos sociales */
+        .social-icons a {
+            font-size: 30px;
+            color: #00aaff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        /* Enlaces de proyectos */
+        .proyectos a {
+            color: #00aaff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Lienzo para la animación de fondo -->
+<canvas id="matrix"></canvas>
+
+<header>
+    <h1>Portafolio de Néstor Villon</h1>
+</header>
+
+<div class="container">
+    <img src="perfil.jpg" alt="Foto de Néstor Villon" class="perfil-img">
+    <h2>Bienvenido a mi Portafolio</h2>
+    <p class="descripcion">
+        Soy estudiante de Ingeniería de Sistemas (7° ciclo) con experiencia en seguridad informática, redes y gestión de infraestructuras tecnológicas.
+        Tengo habilidades en configuración de firewalls, switches, routers y Access Points. También administro soluciones anti-DDoS, Cloud WAF y seguridad de aplicaciones.
+    </p>
+
+    <section class="proyectos">
+        <h2>Mis Proyectos</h2>
+        <p><strong>Proyecto de Control de Gastos:</strong> Aplicación para gestionar gastos personales.</p>
+        <a href="https://git-nestorvp.github.io/Control-Gastos-App/" target="_blank">Ver Proyecto</a>
+    </section>
+
+    <section class="social-icons">
+        <a href="https://github.com/nestorvp" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/nestorvp" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2025 Néstor Villon | Todos los derechos reservados.</p>
+</footer>
+
+<!-- Script de fondo animado estilo Matrix -->
+<script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const symbols = "010101010101011011001010";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#00ff00";
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = symbols[Math.floor(Math.random() * symbols.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+
+    setInterval(drawMatrix, 50);
+
+    window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+</script>
+
+</body>
+</html>
