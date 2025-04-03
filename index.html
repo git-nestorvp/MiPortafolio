@@ -28,7 +28,7 @@
             z-index: 0; /* Colocamos la franja debajo del contenido */
         }
 
-        /* Efecto de binarios */
+        /* Efecto de binarios (Matrix) */
         .binary {
             position: fixed;
             top: 0;
@@ -44,11 +44,14 @@
             overflow: hidden;
         }
 
+        /* Configuración para las columnas de binarios que caen */
         .binary span {
             position: absolute;
-            animation: binaryAnimation 5s infinite linear;
+            top: -100%;
+            animation: binaryAnimation 2s infinite linear;
         }
 
+        /* Animación para simular el efecto de Matrix */
         @keyframes binaryAnimation {
             0% {
                 top: -100%;
@@ -111,7 +114,7 @@
 <!-- Franja semi-transparente -->
 <div class="overlay"></div>
 
-<!-- Efecto de binarios -->
+<!-- Efecto de binarios (Matrix) -->
 <div class="binary" id="binaryContainer">
     <!-- Aquí se generarán los binarios -->
 </div>
@@ -145,18 +148,25 @@
 </footer>
 
 <script>
-    // Generador de binarios
+    // Generador de binarios tipo Matrix
     function generateBinary() {
         const container = document.getElementById('binaryContainer');
-        const binaryLine = document.createElement('span');
-        binaryLine.innerText = Math.random().toString(2).substr(2, 30); // Genera una cadena binaria
-        binaryLine.style.top = Math.random() * window.innerHeight + "px";
-        container.appendChild(binaryLine);
+        const columns = 100; // Número de columnas de binarios
+        const height = window.innerHeight;
 
-        // Eliminar binario después de un tiempo
-        setTimeout(() => {
-            container.removeChild(binaryLine);
-        }, 5000); // 5 segundos de duración de cada binario
+        for (let i = 0; i < columns; i++) {
+            const binaryLine = document.createElement('span');
+            const binaryText = Array.from({length: Math.floor(height / 20)}, () => Math.random() < 0.5 ? '0' : '1').join('');
+            binaryLine.innerText = binaryText;
+            binaryLine.style.left = `${i * 20}px`; // Espaciado entre columnas
+            binaryLine.style.animationDuration = `${Math.random() * 2 + 2}s`; // Duración aleatoria para el movimiento
+            container.appendChild(binaryLine);
+
+            // Eliminar binario después de un tiempo
+            setTimeout(() => {
+                container.removeChild(binaryLine);
+            }, 5000); // 5 segundos de duración de cada binario
+        }
     }
 
     // Generar binarios cada 100ms
